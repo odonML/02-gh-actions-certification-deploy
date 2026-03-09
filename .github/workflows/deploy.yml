@@ -58,7 +58,8 @@ jobs:
       - name: Notify slack
         uses: 8398a7/action-slack@v3
         with:
-          status: ${{ needs.deploy.result }}
+          status: ${{ job.status }}
           fields: repo,commit,author
+          text: "Deployment ${{ needs.deploy.result }} for ${{ github.repository }} by ${{ github.actor }}"
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
